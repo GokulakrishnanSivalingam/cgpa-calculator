@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+        * {
+            margin: 0%;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            background-color: rgba(49, 113, 243, 0.973);
+            color: white;
+            margin-bottom: 50px;
+            height: 50px;
+            padding: 9px;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .semester-container {
+            margin-bottom: 40px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: rgba(49, 113, 243, 0.973);
+            color: white;
+            border: 1px solid rgba(49, 113, 243, 0.973);
+            border-radius: 4px;
+            margin: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .input-container {
+            margin-bottom: 20px;
+        }
+        
+        .input-container input {
+            margin-right: 10px;
+        }
+        
+        select {
+            height: 30px;
+            width: 60px;
+            border: 1px solid grey;
+            border-radius: 2px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .footer-section h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #f9f9f9;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            color: #ccc;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .socials {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .socials a {
+            color: #ccc;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .socials a:hover {
+            color: #fff;
+        }
+        
+        .newsletter input[type="email "] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 25px;
+            background-color: white;
+            color: #000;
+        }
+        
+        .newsletter button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            background-color: #e91e63;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter button:hover {
+            background-color: #c2185b;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px;
+            color: #888;
+            font-family: "Roboto ", serif;
+        }
+        
+        ul li a {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <div class="header">
+        <h1>CGPA Calculator</h1>
+    </div>
+    <div id='cgpa'>
+        <div id="semesters"></div>
+        <h2 id="overall-gpa-display">Overall GPA: 0.00</h2>
+        <h2 id="overall-cgpa-display">Overall CGPA: 0.00</h2>
+    </div>
+    <button onclick="addSemester()">Add Semester</button>
+    <button id="screenshot-button">Download</button>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section logo">
+                <h1>CGPA CALZ</h1>
+                <p>Elegance meets excellence. Discover the difference with us.</p>
+                <div class="socials ">
+                    <a href="# "><i class="fab fa-facebook-f"></i></a>
+                    <a href="# "><i class="fab fa-twitter"></i></a>
+                    <a href="# "><i class="fab fa-instagram"></i></a>
+                    <a href="# "><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links ">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="# ">Home</a></li>
+                    <li><a href="# ">About</a></li>
+                    <li><a href="# ">Services</a></li>
+                    <li><a href="# ">Portfolio</a></li>
+                    <li><a href="# ">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section newsletter ">
+                <h2>Newsletter</h2>
+                <p>Subscribe to our newsletter to stay updated on our latest news and offers.</p>
+                <form action="# " method="post ">
+                    <input type="email " name="email " placeholder="Enter your email " required>
+                    <button type="submit ">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom ">
+            <p>&copy; 2024 CGPA CALZ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const semesterSubjects = [{
+                name: "Semester 1",
+                subjects: [{
+                    name: "Communicative English",
+                    credits: 2
+                }, {
+                    name: "Matrices,Differential and Integral Calculus",
+                    credits: 4
+                }, {
+                    name: "Engineering Chemistry",
+                    credits: 3
+                }, {
+                    name: "Programming for Problem Solving in C",
+                    credits: 3
+                }, {
+                    name: "Engineering Graphics",
+                    credits: 4
+                }, {
+                    name: "Chemistry Laboratory",
+                    credits: 1
+                }, {
+                    name: "C Programming Laboratory",
+                    credits: 2
+                }, {
+                    name: "Communication English Laboratory",
+                    credits: 1
+                }]
+            }, {
+                name: "Semester 2",
+                subjects: [{
+                    name: "Vector Calculas and Complex Functions",
+                    credits: 4
+                }, {
+                    name: "Engineering Physics",
+                    credits: 3
+                }, {
+                    name: "Programming for Problem Solving in Python",
+                    credits: 4
+                }, {
+                    name: "Basic Electrical Electronics And Communication Enginnering",
+                    credits: 3
+                }, {
+                    name: "Introduction To Information And Computing Technology",
+                    credits: 3
+                }, {
+                    name: "Constitution Of India",
+                    credits: 0
+                }, {
+                    name: "Physics Laboratory",
+                    credits: 1
+                }, {
+                    name: "Basic Electrical Electronics And Communication Enginnering Laboratory",
+                    credits: 1
+                }, {
+                    name: "Workshop Practice",
+                    credits: 2
+                }, {
+                    name: "QA/VR",
+                    credits: 1
+                }]
+            },
+
+            {
+                name: "Semester 3",
+                subjects: [{
+                    name: "Data Structures",
+                    credits: 3
+                }, {
+                    name: "Digital Logic Circuits",
+                    credits: 4
+                }, {
+                    name: "Object Oriented Programming",
+                    credits: 3
+                }, {
+                    name: "Computer Architecture",
+                    credits: 3
+                }, {
+                    name: "Discrete Mathematics",
+                    credits: 4
+                }, {
+                    name: "Fundamental Of Nano Science",
+                    credits: 0
+                }, {
+                    name: "Data Structure Laboratory",
+                    credits: 1
+                }, {
+                    name: "Object Oriented Programming Laboratory",
+                    credits: 1
+                }, {
+                    name: "Personality And Character Development",
+                    credits: 0
+                }, {
+                    name: "QA/BS",
+                    credits: 1
+                }]
+            },
+
+            {
+                name: "Semester 4",
+                subjects: [{
+                    name: "Operating System",
+                    credits: 3
+                }, {
+                    name: "Design And Analysis Of Algorithms",
+                    credits: 4
+                }, {
+                    name: "Object Oriented Software Engineering",
+                    credits: 3
+                }, {
+                    name: "Database Management System",
+                    credits: 3
+                }, {
+                    name: "Java Programming",
+                    credits: 3
+                }, {
+                    name: "Probability And Queueing Theory",
+                    credits: 4
+                }, {
+                    name: "Environmental Science And Engineering",
+                    credits: 0
+                }, {
+                    name: "Operating System Laboratory",
+                    credits: 1
+                }, {
+                    name: "Programming in JAVA Laboratory",
+                    credits: 1
+                }, {
+                    name: "Database Management System",
+                    credits: 1
+                }, {
+                    name: "QA/CS",
+                    credits: 1
+                }]
+            },
+
+            {
+                name: "Semester 5",
+                subjects: [{
+                    name: "Internet Programming",
+                    credits: 3
+                }, {
+                    name: "Theory Of Computation",
+                    credits: 4
+                }, {
+                    name: "Computer Network",
+                    credits: 3
+                }, {
+                    name: "Professional Ethics And Human Values",
+                    credits: 3
+                }, {
+                    name: "Professional Elective-I",
+                    credits: 3
+                }, {
+                    name: "Open Elective-I",
+                    credits: 3
+                }, {
+                    name: "Internet Programming Laboratory",
+                    credits: 1
+                }, {
+                    name: "Computer Network Laboratory",
+                    credits: 1
+                }, {
+                    name: "QA/SS",
+                    credits: 1
+                }]
+            },
+
+            {
+                name: "Semester 6",
+                subjects: [{
+                    name: "Mobile Computing",
+                    credits: 3
+                }, {
+                    name: "Compiler Design",
+                    credits: 3
+                }, {
+                    name: "Artificial Intelligence",
+                    credits: 4
+                }, {
+                    name: "Resource Management And Techniques",
+                    credits: 3
+                }, {
+                    name: "Professional Elective-II",
+                    credits: 3
+                }, {
+                    name: "Open Elective-II",
+                    credits: 3
+                }, {
+                    name: "Mobile Application Development Laboratory",
+                    credits: 1
+                }, {
+                    name: "Compiler Design Laboratory",
+                    credits: 1
+                }, {
+                    name: "Internship",
+                    credits: 1
+                }, {
+                    name: "Mini Project",
+                    credits: 1
+                }]
+            },
+
+            {
+                name: "Semester 7",
+                subjects: [{
+                    name: "Cryptography And Network Security",
+                    credits: 3
+                }, {
+                    name: "Data Science Using Python",
+                    credits: 3
+                }, {
+                    name: "Cloud Computing And Virtualization",
+                    credits: 3
+                }, {
+                    name: "Professional Elective-III",
+                    credits: 3
+                }, {
+                    name: "Professional Elective-IV",
+                    credits: 3
+                }, {
+                    name: "Open Elective-III",
+                    credits: 3
+                }, {
+                    name: "Cloud Computing Laboratory",
+                    credits: 2
+                }, {
+                    name: "Data Science Using Python Laboratory",
+                    credits: 2
+                }, ]
+            },
+
+            {
+                name: "Semester 8",
+                subjects: [{
+                    name: "Professional Elective-V",
+                    credits: 3
+                }, {
+                    name: "Professional Elective-VI",
+                    credits: 3
+                }, {
+                    name: "Project Work",
+                    credits: 6
+                }]
+            },
+
+        ];
+
+        let currentSemesterIndex = 0;
+
+        function loadSemesters() {
+            const semestersContainer = document.getElementById('semesters');
+            semestersContainer.innerHTML = '';
+
+            const semester = semesterSubjects[currentSemesterIndex];
+            const semesterContainer = document.createElement('div');
+            semesterContainer.className = 'semester-container';
+
+            const semesterTitle = document.createElement('h3');
+            semesterTitle.textContent = semester.name;
+            semesterContainer.appendChild(semesterTitle);
+
+            const table = document.createElement('table');
+            table.className = 'subject-list';
+
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>Credit Hours</th>
+            `;
+            table.appendChild(headerRow);
+
+            semester.subjects.forEach(subject => {
+                const row = document.createElement('tr');
+
+                const subjectCell = document.createElement('td');
+                subjectCell.textContent = subject.name;
+
+                const gradeCell = document.createElement('td');
+                const gradeSelect = document.createElement('select');
+                ['O', 'A+', 'A', 'B+', 'B', 'C+', 'C'].forEach(grade => {
+                    const option = document.createElement('option');
+                    option.value = grade;
+                    option.textContent = grade;
+                    gradeSelect.appendChild(option);
+                });
+                gradeSelect.onchange = calculateOverallCGPA;
+                gradeCell.appendChild(gradeSelect);
+
+                const creditsCell = document.createElement('td');
+                creditsCell.textContent = subject.credits;
+
+                row.appendChild(subjectCell);
+                row.appendChild(gradeCell);
+                row.appendChild(creditsCell);
+
+                table.appendChild(row);
+            });
+
+            semesterContainer.appendChild(table);
+            semestersContainer.appendChild(semesterContainer);
+        }
+
+        function addSemester() {
+            currentSemesterIndex++;
+            if (currentSemesterIndex < semesterSubjects.length) {
+                loadSemesters();
+            }
+        }
+
+        function updateSubjects() {
+            const subjectName = document.getElementById('subject-name').value.trim();
+            const credits = parseInt(document.getElementById('subject-credits').value);
+
+            if (subjectName && !isNaN(credits)) {
+                semesterSubjects.forEach(semester => {
+                    semester.subjects.forEach(subject => {
+                        subject.name = subjectName;
+                        subject.credits = credits;
+                    });
+                });
+                loadSemesters();
+            } else {
+                alert('Please enter valid subject name and credits.');
+            }
+        }
+
+        function calculateOverallCGPA() {
+            let totalCredits = 0;
+            let totalGradePoints = 0;
+
+
+            const rows = document.querySelectorAll('.semester-container .subject-list tr');
+            rows.forEach((row, rowIndex) => {
+                if (rowIndex === 0) return; // Skip header row
+                const grade = row.cells[1].querySelector('select').value;
+                const credits = parseInt(row.cells[2].textContent);
+                totalCredits += credits;
+                totalGradePoints += getGradePoint(grade) * credits;
+
+            });
+
+            const overallCgpa = totalGradePoints / totalCredits;
+
+
+            document.getElementById('overall-gpa-display').textContent = `Overall GPA: ${overallCgpa.toFixed(2)}`;
+
+
+        }
+
+        function getGradePoint(grade) {
+            switch (grade) {
+                case 'O':
+                    return 10;
+                case 'A+':
+                    return 9;
+                case 'A':
+                    return 8;
+                case 'B+':
+                    return 7;
+                case 'B':
+                    return 6;
+                case 'C+':
+                    return 5;
+                case 'C':
+                    return 4;
+
+                default:
+                    return 0;
+            }
+        }
+
+        // Load the first semester initially
+        loadSemesters();
+        document.getElementById('screenshot-button').addEventListener('click', function() {
+            const captureArea = document.getElementById('cgpa');
+
+            html2canvas(captureArea).then(canvas => {
+                // Convert the canvas to an image
+                const image = canvas.toDataURL('image/png');
+
+                // Create a link to download the image
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'screenshot.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

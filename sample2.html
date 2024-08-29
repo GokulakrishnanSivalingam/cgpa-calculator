@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Example</title>
+    <style>
+        #capture-area {
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="capture-area">
+        <h1>Content to Capture</h1>
+        <p>This is the area that will be captured in the screenshot.</p>
+    </div>
+    <button id="screenshot-button">Take Screenshot and Download</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('screenshot-button').addEventListener('click', function() {
+            const captureArea = document.getElementById('capture-area');
+
+            html2canvas(captureArea).then(canvas => {
+                // Convert the canvas to an image
+                const image = canvas.toDataURL('image/png');
+
+                // Create a link to download the image
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'screenshot.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

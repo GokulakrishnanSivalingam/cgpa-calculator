@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA CALCULATOR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        h1,
+        h2 {
+            color: #0056b3;
+            /* Wikipedia blue */
+        }
+        
+        .containers {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: 1px solid #0056b3;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .section {
+            display: none;
+            /* Hidden by default */
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CGPA CALCULATOR</h1>
+        <p>The CGPA (Cumulative Grade Point Average) calculator helps students calculate their overall academic performance.</p>
+
+        <h2>SECTION</h2>
+        <button id="showCgpaDefinition">What is CGPA?</button>
+        <div id="cgpaDefinition" class="section">
+            <h3>WHAT IS CGPA?</h3>
+            <p>CGPA stands for Cumulative Grade Point Average. It is a measure of a student's academic performance calculated by taking the average of grade points obtained in all subjects.</p>
+        </div>
+
+        <button id="showGradeTable">Marks and Letter Grades</button>
+        <div id="gradeTable" class="section">
+            <h3>Marks and Letter Grades</h3>
+            <table>
+                <tr>
+                    <th>Marks</th>
+                    <th>Letter Grade</th>
+                    <th>Grade Points</th>
+                </tr>
+                <tr>
+                    <td>90-100</td>
+                    <td>A+</td>
+                    <td>4.0</td>
+                </tr>
+                <tr>
+                    <td>80-89</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                </tr>
+                <tr>
+                    <td>70-79</td>
+                    <td>B+</td>
+                    <td>3.5</td>
+                </tr>
+                <tr>
+                    <td>60-69</td>
+                    <td>B</td>
+                    <td>3.0</td>
+                </tr>
+                <tr>
+                    <td>50-59</td>
+                    <td>C</td>
+                    <td>2.0</td>
+                </tr>
+                <tr>
+                    <td>40-49</td>
+                    <td>D</td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td>0-39</td>
+                    <td>F</td>
+                    <td>0.0</td>
+                </tr>
+            </table>
+        </div>
+
+        <button id="showCalculationMethod">How to Calculate CGPA?</button>
+        <div id="calculationMethod" class="section">
+            <h3>How to Calculate CGPA?</h3>
+            <p>To calculate CGPA, use the formula:</p>
+            <p>CGPA = (Total Grade Points Earned) / (Total Credits)</p>
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th>Credits</th>
+                    <th>Grade Points</th>
+                </tr>
+                <!-- Add rows for subjects here -->
+            </table>
+        </div>
+
+        <div id="thankYouMessage" class="section">
+            <h3>Thank You!</h3>
+            <p>Your CGPA will be calculated based on the grades you input.</p>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide CGPA definition
+        document.getElementById('showCgpaDefinition').addEventListener('click', function() {
+            const definition = document.getElementById('cgpaDefinition');
+            definition.style.display = 'block';
+            document.getElementById('showGradeTable').style.display = 'block'; // Show the next button
+        });
+
+        // Show/hide grade table
+        document.getElementById('showGradeTable').addEventListener('click', function() {
+            const gradeTable = document.getElementById('gradeTable');
+            gradeTable.style.display = 'block';
+            document.getElementById('showCalculationMethod').style.display = 'block'; // Show the next button
+        });
+
+        // Show/hide calculation method
+        document.getElementById('showCalculationMethod').addEventListener('click', function() {
+            const calculationMethod = document.getElementById('calculationMethod');
+            calculationMethod.style.display = 'block';
+            document.getElementById('thankYouMessage').style.display = 'block'; // Show thank you message
+        });
+    </script>
+</body>
+
+</html>

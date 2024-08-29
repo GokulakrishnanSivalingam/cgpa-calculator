@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        /* Add your custom styles here */
+        
+        .semester-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CGPA Calculator</h1>
+
+    <!-- Container to display the semesters and their details -->
+    <div id="semesters"></div>
+
+    <!-- Button to add a new semester -->
+    <button onclick="addSemester()">Add Semester</button>
+
+    <!-- Display GPA for the current semester -->
+    <div id="overall-gpa-display">
+        GPA for Current Semester: N/A
+    </div>
+
+    <!-- Display overall CGPA -->
+    <div id="overall-cgpa-display">
+        Overall CGPA: N/A
+    </div>
+
+    <!-- Screenshot button -->
+    <button id="screenshot-button">Download Screenshot</button>
+
+    <script>
+        const semesterSubjects = [{
+                name: "Semester 1",
+                subjects: [{
+                        name: "Subject 1",
+                        credits: 4
+                    }, {
+                        name: "Subject 2",
+                        credits: 3
+                    }
+                    // Add more subjects here
+                ]
+            }, {
+                name: "Semester 2",
+                subjects: [{
+                        name: "Subject 1",
+                        credits: 4
+                    }, {
+                        name: "Subject 2",
+                        credits: 3
+                    }
+                    // Add more subjects here
+                ]
+            }
+            // Add more semesters here
+        ];
+
+        let currentSemesterIndex = 0;
+
+        function loadSemesters() {
+            const semestersContainer = document.getElementById('semesters');
+            semestersContainer.innerHTML = '';
+
+            for (let i = 0; i <= currentSemesterIndex; i++) {
+                const semester = semesterSubjects[i];
+                const semesterContainer = document.createElement('div');
+                semesterContainer.className = 'semester-container';
+
+                const semesterTitle = document.createElement('h3');
+                semesterTitle.textContent = semester.name;
+                semesterContainer.appendChild(semesterTitle);
+
+                const table = document.createElement('table');
+                table.className = 'subject-list';
+
+                const headerRow = document.createElement('tr');
+                headerRow.innerHTML = `
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th>Credit Hours</th>
+                `;
+                table.appendChild(headerRow);
+
+                semester.subjects.forEach(subject => {
+                    const row = document.createElement('tr');
+
+                    const subjectCell = document.createElement('td');
+                    subjectCell.textContent = subject.name;
+
+                    const gradeCell = document.createElement('td');
+                    const gradeSelect = document.createElement('select');
+                    ['O', 'A+', 'A', 'B+', 'B', 'C+', 'C'].forEach(grade => {
+                        const option = document.createElement('option');
+                        option.value = grade;
+                        option.textContent = grade;
+                        gradeSelect.appendChild(option);
+                    });
+                    gradeSelect.onchange = calculateCGPA;
+                    gradeCell.appendChild(gradeSelect);
+
+                    const creditsCell = document.createElement('td');
+                    creditsCell.textContent = subject.credits;
+
+                    row.appendChild(subjectCell);
+                    row.appendChild(gradeCell);
+                    row.appendChild(creditsCell);
+
+                    table.appendChild(row);
+                });
+
+                semesterContainer.appendChild(table);
+                semestersContainer.appendChild(semesterContainer);
+            }
+        }
+
+        function addSemester() {
+            if (currentSemesterIndex < semesterSubjects.length - 1) {
+                currentSemesterIndex++;
+                loadSemesters();
+            }
+        }
+
+        function calculateCGPA() {
+            let totalCredits = 0;
+            let totalGradePoints = 0;
+            let gpa = 0;
+
+            const semesters = document.querySelectorAll('.semester-container');
+            semesters.forEach((semester, semesterIndex) => {
+                let semesterCredits = 0;
+                let semesterGradePoints = 0;
+
+                const rows = semester.querySelectorAll('.subject-list tr');
+                rows.forEach((row, rowIndex) => {
+                    if (rowIndex === 0) return; // Skip header row
+                    const grade = row.cells[1].querySelector('select').value;
+                    const credits = parseInt(row.cells[2].textContent);
+                    semesterCredits += credits;
+                    semesterGradePoints += getGradePoint(grade) * credits;
+                });
+
+                gpa = semesterGradePoints / semesterCredits;
+                document.getElementById('overall-gpa-display').textContent = `GPA for Current Semester: ${gpa.toFixed(2)}`;
+
+                totalCredits += semesterCredits;
+                totalGradePoints += semesterGradePoints;
+            });
+
+            const overallCGPA = totalGradePoints / totalCredits;
+            document.getElementById('overall-cgpa-display').textContent = `Overall CGPA: ${overallCGPA.toFixed(2)}`;
+        }
+
+        function getGradePoint(grade) {
+            switch (grade) {
+                case 'O':
+                    return 10;
+                case 'A+':
+                    return 9;
+                case 'A':
+                    return 8;
+                case 'B+':
+                    return 7;
+                case 'B':
+                    return 6;
+                case 'C+':
+                    return 5;
+                case 'C':
+                    return 4;
+                default:
+                    return 0;
+            }
+        }
+
+        // Load the first semester initially
+        loadSemesters();
+
+        // Event listener for screenshot button (optional)
+        document.getElementById('screenshot-button').addEventListener('click', function() {
+            const captureArea = document.getElementById('semesters');
+            html2canvas(captureArea).then(canvas => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'screenshot.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>
