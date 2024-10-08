@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+        * {
+            margin: 0%;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            background-color: rgba(49, 113, 243, 0.973);
+            color: white;
+            margin-bottom: 50px;
+            height: 50px;
+            padding: 9px;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .semester-container {
+            margin-bottom: 40px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: rgba(49, 113, 243, 0.973);
+            color: white;
+            border: 1px solid rgba(49, 113, 243, 0.973);
+            border-radius: 4px;
+            margin: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .input-container {
+            margin-bottom: 20px;
+        }
+        
+        .input-container input {
+            margin-right: 10px;
+        }
+        
+        select {
+            height: 30px;
+            width: 60px;
+            border: 1px solid grey;
+            border-radius: 2px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .footer-section h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #f9f9f9;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            color: #ccc;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .socials {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .socials a {
+            color: #ccc;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .socials a:hover {
+            color: #fff;
+        }
+        
+        .newsletter input[type="email "] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 25px;
+            background-color: white;
+            color: #000;
+        }
+        
+        .newsletter button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            background-color: #e91e63;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter button:hover {
+            background-color: #c2185b;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            font-family: "Roboto", serif;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px;
+            color: #888;
+            font-family: "Roboto ", serif;
+        }
+        
+        ul li a {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <div class="header">
+        <h1>CGPA Calculator</h1>
+    </div>
+    <div id='cgpa'>
+        <div id="semesters"></div>
+        <div id="overall-gpa-display">
+            GPA for Current Semester: N/A
+        </div>
+
+        <!-- Display overall CGPA -->
+        <div id="overall-cgpa-display">
+            Overall CGPA: N/A
+        </div>
+    </div>
+    <button onclick="addSemester()">Add Semester</button>
+    <button id="screenshot-button">Download</button>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section logo">
+                <h1>CGPA CALZ</h1>
+                <p>Elegance meets excellence. Discover the difference with us.</p>
+                <div class="socials ">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links ">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="# ">Home</a></li>
+                    <li><a href="# ">About</a></li>
+                    <li><a href="# ">Services</a></li>
+                    <li><a href="# ">Portfolio</a></li>
+                    <li><a href="# ">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section newsletter ">
+                <h2>Newsletter</h2>
+                <p>Subscribe to our newsletter to stay updated on our latest news and offers.</p>
+                <form action="# " method="post ">
+                    <input type="email " name="email " placeholder="Enter your email " required>
+                    <button type="submit ">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom ">
+            <p>&copy; 2024 CGPA CALZ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="mainpage.js">
+    </script>
+</body>
+
+</html>
