@@ -16,13 +16,13 @@ A simple CGPA calculator built using **JavaScript**, **HTML**, and **CSS**. This
 
 ## 📊 Language & Repo Stats
 
-![Top Language](https://img.shields.io/github/languages/top/yourusername/cgpa-calculator)
-![Languages Count](https://img.shields.io/github/languages/count/yourusername/cgpa-calculator)
-![Repo Size](https://img.shields.io/github/repo-size/yourusername/cgpa-calculator)
-![Commit Activity](https://img.shields.io/github/commit-activity/m/yourusername/cgpa-calculator)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/cgpa-calculator)
-![Issues](https://img.shields.io/github/issues/yourusername/cgpa-calculator)
-![Pull Requests](https://img.shields.io/github/issues-pr/yourusername/cgpa-calculator)
+![Top Language](https://img.shields.io/github/languages/top/GokulakrishnanSivalingam/cgpa-calculator)
+![Languages Count](https://img.shields.io/github/languages/count/GokulakrishnanSivalingam/cgpa-calculator)
+![Repo Size](https://img.shields.io/github/repo-size/GokulakrishnanSivalingam/cgpa-calculator)
+![Commit Activity](https://img.shields.io/github/commit-activity/m/GokulakrishnanSivalingam/cgpa-calculator)
+![Last Commit](https://img.shields.io/github/last-commit/GokulakrishnanSivalingam/cgpa-calculator)
+![Issues](https://img.shields.io/github/issues/GokulakrishnanSivalingam/cgpa-calculator)
+![Pull Requests](https://img.shields.io/github/issues-pr/GokulakrishnanSivalingam/cgpa-calculator)
 
 ## 📦 Installation
 
