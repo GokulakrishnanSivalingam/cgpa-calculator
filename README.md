@@ -55,4 +55,4 @@ To get the project running on your local machine:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/cgpa-calculator.git
+   git clone https://github.com/GokulakrishnanSivalingam/cgpa-calculator.git
